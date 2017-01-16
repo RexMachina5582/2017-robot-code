@@ -1,26 +1,26 @@
-
 package org.usfirst.frc.team5582.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-import org.usfirst.frc.team5582.robot.Robot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team5582.robot.OI;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class ArcadeDrive extends CommandBase {
 
-    public ExampleCommand() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+    public ArcadeDrive() {
+    		requires(driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        SmartDashboard.putData(this);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    		driveTrain.arcadeDriveStickAxis(OI.xboxControllerOne.leftStick.getY(), 
+    		OI.xboxControllerOne.leftStick.getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
