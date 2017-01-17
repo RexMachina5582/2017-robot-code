@@ -17,9 +17,9 @@ public class RobotMap {
 	
 	public static int xboxControllerOne = 0;
 	public static int xboxControllerTwo = 1;
-	public static int leftMotorCANA = 3;
-    public static int leftMotorCANB = 4;
-    public static int rightMotorCANA = 1;
-    public static int rightMotorCANB = 2;
+	public static int leftMotorCANA = 1;
+    public static int leftMotorCANB = 2;
+    public static int rightMotorCANA = 3;
+    public static int rightMotorCANB = 4;
 	
 }
