@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Encoder;
 public class DriveTrain extends Subsystem {
 	
 	RobotDrive rexDrive;
+	RobotDrive rexDriveRear;
 	CANTalon leftTalonA, leftTalonB, rightTalonA, rightTalonB;
     //public AnalogInput ultrasonicSensor;
     public Encoder encoder;
@@ -46,19 +47,21 @@ public class DriveTrain extends Subsystem {
     		rightTalonA = new CANTalon(RobotMap.rightMotorCANA);
     		rightTalonB = new CANTalon(RobotMap.rightMotorCANB);
     		rexDrive = new RobotDrive(rightTalonB, rightTalonA, leftTalonB, leftTalonA);
+    		rexDriveRear = new RobotDrive(rightTalonA, leftTalonA);
     }
     
-    public void tankDrive(double leftY, double rightY) {
-    		rexDrive.tankDrive(leftY, rightY);
+    public void tankDrive(double leftStickY, double rightStickY) {
+    		rexDrive.tankDrive(leftStickY, rightStickY);
     }
     
     public void arcadeDriveSingleStick(Joystick stick) {
     		rexDrive.arcadeDrive(stick);
     }
     public void arcadeDriveStickAxis(double leftY, double leftX) {
-    		rexDrive.arcadeDrive(leftY*0.5, leftX*0.5);
-    		//change multiplyer for speed
-    		// change X and Y for direction
+    		rexDrive.arcadeDrive(leftY, leftX);
+    }
+    public void arcadeDriveSkidTurn(double leftMotor, double rightMotor) {
+    		rexDriveRear.setLeftRightMotorOutputs(leftMotor, rightMotor);
     }
 
     public void arcadeDriveAutonomous(double finalPower, double limit) {

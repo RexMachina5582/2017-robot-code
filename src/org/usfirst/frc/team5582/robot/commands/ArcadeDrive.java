@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5582.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team5582.robot.OI;
 
 /**
@@ -8,6 +9,8 @@ import org.usfirst.frc.team5582.robot.OI;
  */
 public class ArcadeDrive extends CommandBase {
 
+	private int tankControl = 0;
+	
     public ArcadeDrive() {
     		requires(driveTrain);
     }
@@ -21,6 +24,15 @@ public class ArcadeDrive extends CommandBase {
     protected void execute() {
     		driveTrain.arcadeDriveStickAxis(OI.xboxControllerOne.leftStick.getY(), 
     		OI.xboxControllerOne.leftStick.getX());
+    		if (OI.skidTurnPressed) {
+    			driveTrain.arcadeDriveSkidTurn(OI.xboxControllerOne.leftStick.getX(), OI.xboxControllerOne.leftStick.getX());
+    		}
+    		if (OI.tankDrivePressed) {
+    			tankControl++;
+    		}
+    		if (tankControl % 2 != 0) {
+			driveTrain.tankDrive(OI.xboxControllerOne.leftStick.getY(), OI.xboxControllerOne.rightStick.getY());
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()

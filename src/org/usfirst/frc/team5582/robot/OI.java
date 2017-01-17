@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
  */
 public class OI {
 
+
     /* Example
 	// WHEEL ARMS STATE
     public enum WheelArmsState {
@@ -34,7 +35,10 @@ public class OI {
 	public static DriverStation driverStation;
 	public static XboxController xboxControllerOne;
 	public static XboxController xboxControllerTwo;
-	public static Button followButton;
+	public static Button skidTurn;
+	public static boolean skidTurnPressed;
+	public static Button tankDrive;
+	public static boolean tankDrivePressed;
 	
 	
 	public static void init()
@@ -47,10 +51,16 @@ public class OI {
 		xboxControllerOne.setDeadZone(0.1);
 		xboxControllerTwo.setDeadZone(0.1);
 		/** BUTTONS **/
+		skidTurn = xboxControllerOne.x;
+		skidTurnPressed = skidTurn.get();
+		tankDrive = xboxControllerOne.y;
+		tankDrivePressed = tankDrive.get();
+		
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;
 				
 	}	
 	
+
 	/* Example
 	// WHEEL ARMS STATE
 		public static WheelArmsState getWheelArmsState() {
