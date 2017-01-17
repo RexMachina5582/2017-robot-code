@@ -2,7 +2,7 @@
 package org.usfirst.frc.team5582.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.vision.USBCamera;
+//import edu.wpi.first.wpilibj.vision.USBCamera;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -30,8 +30,8 @@ public class RexRobot extends IterativeRobot {
     Command autonomousBallArms;
     CameraServer cameraServer;
     CameraServer camera;
-    USBCamera cameraFront;
-    USBCamera cameraRear;
+    //USBCamera cameraFront;
+    //USBCamera cameraRear;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -46,16 +46,16 @@ public class RexRobot extends IterativeRobot {
 	  	  */
 	  	  
 		//cameraFront = new USBCamera("cam0");
-		cameraRear = new USBCamera("cam1");
-		cameraRear.setFPS(12);
-		cameraRear.updateSettings();
-		cameraRear.openCamera();
+		//cameraRear = new USBCamera("cam1");
+		//cameraRear.setFPS(12);
+		//cameraRear.updateSettings();
+		//cameraRear.openCamera();
 		//cameraFront.setFPS(12);
 		//cameraFront.updateSettings();
 		//cameraFront.openCamera();
-		cameraServer = CameraServer.getInstance();
+		//cameraServer = CameraServer.getInstance();
 		//cameraServer.startAutomaticCapture(cameraFront);
-		cameraServer.startAutomaticCapture(cameraRear);
+		//cameraServer.startAutomaticCapture(cameraRear);
 		
 		
    }

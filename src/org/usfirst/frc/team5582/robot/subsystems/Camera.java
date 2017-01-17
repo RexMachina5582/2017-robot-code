@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5582.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.vision.USBCamera;
+//import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class Camera {
 	/*
@@ -17,15 +17,16 @@ public class Camera {
 			SmartDashboard.putData(instance);
 			return instance;
 		}
-		*/
+		
 		
 	CameraServer server;
-	USBCamera cam;
+	//USBCamera cam;
 	public Camera(String name,int width,int height,int compressionLevel){
         server = CameraServer.getInstance();
-        cam = new USBCamera(name);
-        cam.setSize(width, height);
+        //cam = new USBCamera(name);
+        //cam.setSize(width, height);
         server.setQuality(compressionLevel);
         server.startAutomaticCapture(cam);
 	}
+	*/
 }
