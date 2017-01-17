@@ -24,10 +24,13 @@ public class ArcadeDrive extends CommandBase {
     protected void execute() {
     		driveTrain.arcadeDriveStickAxis(OI.xboxControllerOne.leftStick.getY(), 
     		OI.xboxControllerOne.leftStick.getX());
-    		if (OI.skidTurnPressed) {
+    		//---
+    		boolean skidTurnPressed = OI.xboxControllerOne.x.get();
+    		if (skidTurnPressed) {
     			driveTrain.arcadeDriveSkidTurn(OI.xboxControllerOne.leftStick.getX(), OI.xboxControllerOne.leftStick.getX());
     		}
-    		if (OI.tankDrivePressed) {
+    		boolean tankDrivePressed = OI.xboxControllerOne.y.get();
+    		if (tankDrivePressed) {
     			tankControl++;
     		}
     		if (tankControl % 2 != 0) {
