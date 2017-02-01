@@ -43,9 +43,9 @@ public class OI {
 		
 		// Tank controls
 		xboxControllerOne = new XboxController(RobotMap.xboxControllerOne);
-		xboxControllerTwo = new XboxController(RobotMap.xboxControllerTwo);
+		//xboxControllerTwo = new XboxController(RobotMap.xboxControllerTwo);
 		xboxControllerOne.setDeadZone(0.1);
-		xboxControllerTwo.setDeadZone(0.1);
+		//xboxControllerTwo.setDeadZone(0.1);
 		/** BUTTONS **/
 		
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;
