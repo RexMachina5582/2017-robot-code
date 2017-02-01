@@ -25,6 +25,7 @@ public class ArcadeDrive extends CommandBase {
     		driveTrain.arcadeDriveStickAxis(OI.xboxControllerOne.leftStick.getY(), 
     		OI.xboxControllerOne.leftStick.getX());
     		//---
+    		
     		boolean skidTurnPressed = OI.xboxControllerOne.x.get();
     		if (skidTurnPressed) {
     			driveTrain.arcadeDriveSkidTurn(OI.xboxControllerOne.leftStick.getX(), OI.xboxControllerOne.leftStick.getX());
@@ -36,6 +37,7 @@ public class ArcadeDrive extends CommandBase {
     		if (tankControl % 2 != 0) {
 			driveTrain.tankDrive(OI.xboxControllerOne.leftStick.getY(), OI.xboxControllerOne.rightStick.getY());
 		}
+		
     }
 
     // Make this return true when this Command no longer needs to run execute()
