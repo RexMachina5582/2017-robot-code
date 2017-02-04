@@ -17,11 +17,11 @@ import org.json.simple.parser.ParseException;
 import org.usfirst.frc.team5582.robot.MessageClient.ConnectionState;
 
 public class MessageClient implements MqttCallback {
-	private static final int CONNECT_RETRY_TIME_MS = 1000;
+	private static final int CONNECT_RETRY_TIME_MS = 10000;
 	private String brokerAddress;
 	private MqttClient client;
 	private MemoryPersistence persistance; // needed for mqtt
-	private ConnectionState state = ConnectionState.DISCONNECTED;
+	private static ConnectionState state = ConnectionState.DISCONNECTED;
 	
 	private static final String PROPERTIES_TOPIC = "robot/properties/";
 	
@@ -61,7 +61,7 @@ public class MessageClient implements MqttCallback {
 					connOpts.setCleanSession(true);
 					connOpts.setConnectionTimeout(1);
 					
-					System.out.println("[MQTT] Connecting to broker: " + brokerAddress);
+					System.out.println("[MQTT] " + Thread.currentThread().getName() + " connecting to broker: " + brokerAddress);
 					client.connect(connOpts);
 					state = ConnectionState.CONNECTED;
 					System.out.println("[MQTT] Connected to client sucsessfully");
@@ -75,11 +75,14 @@ public class MessageClient implements MqttCallback {
 
 					client.subscribe(PROPERTIES_TOPIC + "#");
 				} catch (MqttException e) {
-					System.err.println("[MQTT] MqttException, error connecting. Trying again");
+					
+					System.err.println("[MQTT] " + Thread.currentThread().getName() + " MqttException, exception thrown:" + e.toString());
 					
 					try {
 						Thread.sleep(CONNECT_RETRY_TIME_MS);
+						System.err.println("[MQTT] " + Thread.currentThread().getName() + " MqttException recovery: trying again.");
 					} catch (Exception e1) {
+						System.err.println("[MQTT] " + Thread.currentThread().getName() + " MqttException, ignoring and will retry: " + e1.toString());
 					}
 				}
 			}
@@ -110,7 +113,8 @@ public class MessageClient implements MqttCallback {
 	
 	@Override
 	public void connectionLost(Throwable ex) {
-		System.err.println("[MQTT] Connection lost");
+		System.err.println("[MQTT] Callback: connection lost");
+		ex.printStackTrace(System.err);
 		state = ConnectionState.DISCONNECTED;
 		connect();
 	}
