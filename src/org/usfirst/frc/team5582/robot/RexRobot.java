@@ -8,6 +8,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.usfirst.frc.team5582.robot.MessageClient;
+
 import org.usfirst.frc.team5582.robot.commands.*;
 
 /**
@@ -28,6 +39,7 @@ public class RexRobot extends IterativeRobot {
     Command cameraCommand;
     Command autonomousWinch;
     Command autonomousBallArms;
+    public static MessageClient messageClient;
     CameraServer cameraServer;
     CameraServer camera;
     //USBCamera cameraFront;
@@ -38,6 +50,8 @@ public class RexRobot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	messageClient = new MessageClient("tcp://localhost:5888", "rex/vision/telemetry");
+		messageClient.connect();
 		CommandBase.init();
 		/*
 	 	  camera = CameraServer.getInstance();

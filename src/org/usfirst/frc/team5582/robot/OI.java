@@ -2,6 +2,7 @@ package org.usfirst.frc.team5582.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team5582.robot.subsystems.*;
+import org.usfirst.frc.team5582.robot.commands.*;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 
@@ -35,6 +36,8 @@ public class OI {
 	public static DriverStation driverStation;
 	public static XboxController xboxControllerOne;
 	public static XboxController xboxControllerTwo;
+	// Button Type
+	public static Button seekTarget;
 	
 	
 	public static void init()
@@ -47,7 +50,8 @@ public class OI {
 		xboxControllerOne.setDeadZone(0.1);
 		//xboxControllerTwo.setDeadZone(0.1);
 		/** BUTTONS **/
-		
+		seekTarget = xboxControllerOne.a;
+		seekTarget.whileHeld(new TargetRotate());
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;
 				
 	}	
