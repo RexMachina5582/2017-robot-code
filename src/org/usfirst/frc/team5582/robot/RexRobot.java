@@ -102,7 +102,7 @@ public class RexRobot extends IterativeRobot {
 
     public void teleopInit() {
         Scheduler.getInstance().add(firstCommand);
-        Scheduler.getInstance().add(cameraCommand);
+        //Scheduler.getInstance().add(cameraCommand);
         SmartDashboard.putData(Scheduler.getInstance());
     }
 

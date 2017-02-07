@@ -116,7 +116,7 @@ public class MessageClient implements MqttCallback {
 		System.err.println("[MQTT] Callback: connection lost");
 		ex.printStackTrace(System.err);
 		state = ConnectionState.DISCONNECTED;
-		connect();
+		//connect();
 	}
 
 	@Override

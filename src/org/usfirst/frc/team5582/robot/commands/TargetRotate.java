@@ -14,10 +14,10 @@ public class TargetRotate extends CommandBase {
 	private double offset;
 	
 	//Major is the large rotation phase, and minor is the small
-	private double MAJOR_SPEED = .50;
-	private double MINOR_SPEED = .25;
-	private double TRANSITION_ERROR = .35;
-	private double TOLERANCE = .02;
+	private double MAJOR_SPEED = .40;
+	private double MINOR_SPEED = .20;
+	private double TRANSITION_ERROR = 100;
+	private double TOLERANCE = 3;
 	
 	PIDController rotationPID;
 	FloatInput errorInput;
@@ -36,11 +36,20 @@ public class TargetRotate extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-	    	JSONObject obj = RexRobot.messageClient.getJsonObject("rex/vision/telemetry");
+    		boolean hasTarget;
+    		JSONObject obj = null;
+	    	try {
+	    		obj = RexRobot.messageClient.getJsonObject("rex/vision/telemetry");
+	    		hasTarget = (Boolean)obj.getOrDefault("hasTarget",false);
+	    	} catch (Exception e) {
+	    		hasTarget = false;
+	    		System.out.println("hasTarget is equal to false");
+	    	}
 	    	
-	    	boolean hasTarget = (Boolean)obj.getOrDefault("hasTarget",false);
+	    	
 	    	if (!hasTarget){
 	    		driveTrain.stopDrive();
+	    		System.out.println("No Target, stopping");
 	    		return;
 	    	}
 	    
@@ -48,7 +57,7 @@ public class TargetRotate extends CommandBase {
 	    	
 	    	if (distance > 9999){
 	    		driveTrain.stopDrive();
-	    		System.out.println("Distance is over 9000!");
+	    		System.out.println("Distance is " + distance + "!");
 	    		return;
 	    	}
 	    	
@@ -63,6 +72,7 @@ public class TargetRotate extends CommandBase {
 	    	double offsetCorrection = 0;
 	    	offset = (Double) obj.get("horizontalOffset") - horizError + offsetCorrection;
 	
+	    	System.out.println("Offset is set to" + offset);
 	    	double speed = 0;
 	    	if (Math.abs(offset) > TRANSITION_ERROR){
 	    		speed = MAJOR_SPEED;

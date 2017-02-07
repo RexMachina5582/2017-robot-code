@@ -61,7 +61,7 @@ public class DriveTrain extends Subsystem {
     		rexDrive.arcadeDrive(leftY, leftX);
     }
     public void arcadeDriveSkidTurn(double leftMotor, double rightMotor) {
-    		rexDriveRear.setLeftRightMotorOutputs(leftMotor, rightMotor);
+    		rexDrive.setLeftRightMotorOutputs(leftMotor, rightMotor);
     }
 
     public void arcadeDriveAutonomous(double finalPower, double limit) {
