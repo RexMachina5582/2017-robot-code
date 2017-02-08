@@ -1,43 +1,30 @@
 package org.usfirst.frc.team5582.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5582.robot.OI;
-import org.usfirst.frc.team5582.robot.subsystems.*;
 
 /**
  *
  */
-public abstract class CommandBase extends Command {
-	
-	public static OI oi;
-	public static DriveTrain driveTrain;
-	public static Camera camera;
-	public static BallIntake ballIntake;
-	public static GearElevator gearElevator;
-	public static GearGripper gearGripper;
-	
-	public static void init() {
-		driveTrain = DriveTrain.getInstance();
-		ballIntake = BallIntake.getInstance();
-		gearElevator = GearElevator.getInstance();
-		gearGripper = GearGripper.getInstance();
-		//camera = Camera.getInstance();
-		oi = new OI();
-		oi.init();
-	}
+public class IntakeBall extends CommandBase {
 
-    public CommandBase() {
-    		super();
+	
+	
+    public IntakeBall() {
+    		requires(ballIntake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+        
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	ballIntake.intakeBall();
+		
     }
 
     // Make this return true when this Command no longer needs to run execute()
