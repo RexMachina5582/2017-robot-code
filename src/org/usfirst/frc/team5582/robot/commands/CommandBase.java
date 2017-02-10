@@ -13,10 +13,14 @@ public abstract class CommandBase extends Command {
 	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static Camera camera;
+	public static BallStager ballStager;
+	public static BallShooter ballShooter;
 	
 	public static void init() {
 		driveTrain = DriveTrain.getInstance();
 		//camera = Camera.getInstance();
+		ballStager = BallStager.getInstance();
+		ballShooter = BallShooter.getInstance();
 		oi = new OI();
 		oi.init();
 	}
