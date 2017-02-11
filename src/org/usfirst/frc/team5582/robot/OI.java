@@ -41,6 +41,8 @@ public class OI {
 	public static Button getBallOffGround;
 	public static Button elevateLift;
 	public static Button dropLift;
+	public static Button shootBall;
+	public static Button stageBall;
 	
 	
 	public static void init()
@@ -61,6 +63,11 @@ public class OI {
 		elevateLift.whileHeld(new ElevateGear());
 		dropLift = xboxControllerOne.y;
 		dropLift.whileHeld(new DropGear());
+		shootBall = xboxControllerOne.lb;
+		shootBall.whileHeld(new ShootBall());
+		stageBall = xboxControllerOne.rb;
+		stageBall.whileHeld(new StageBall());
+			
 		
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;
 		

@@ -16,7 +16,7 @@ public class BallShooter extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	PWM ballLoadMotor;
+	PWM ballShooterMotor;
 
 	// First, some Singleton housekeeping. Make sure there is only one.	
 	public static BallShooter instance;
@@ -33,6 +33,12 @@ public static BallShooter getInstance() {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new ShootBall());
+    }
+    
+    public void spinMotor(){
+    	double power = 0.5;
+    	
+    	ballShooterMotor.setSpeed(power);
     }
 
 }
