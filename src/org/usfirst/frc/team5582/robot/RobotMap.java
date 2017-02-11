@@ -24,6 +24,6 @@ public class RobotMap {
     public static int ballLoadPWM = 0;
     public static int ballShootPWM = 1;
     public static int ballIntakePWM = 2;
-    public static int gearElevatorPWM = 3;
-    
+    public static int gearClampPWM = 3;
+	
 }

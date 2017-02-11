@@ -15,9 +15,15 @@ public abstract class CommandBase extends Command {
 	public static Camera camera;
 	public static BallStager ballStager;
 	public static BallShooter ballShooter;
+	public static BallIntake ballIntake;
+	public static GearElevator gearElevator;
+	public static GearGripper gearGripper;
 	
 	public static void init() {
 		driveTrain = DriveTrain.getInstance();
+		ballIntake = BallIntake.getInstance();
+		gearElevator = GearElevator.getInstance();
+		gearGripper = GearGripper.getInstance();
 		//camera = Camera.getInstance();
 		ballStager = BallStager.getInstance();
 		ballShooter = BallShooter.getInstance();
