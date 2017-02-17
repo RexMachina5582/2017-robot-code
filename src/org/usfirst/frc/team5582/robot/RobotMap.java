@@ -21,9 +21,10 @@ public class RobotMap {
     public static int leftMotorCANB = 2;
     public static int rightMotorCANA = 3;
     public static int rightMotorCANB = 4;
-    public static int ballLoadPWM = 0;
-    public static int ballShootPWM = 1;
-    public static int ballIntakePWM = 2;
-    public static int gearClampPWM = 3;
+    public static int ballLoadSpark = 0;
+    public static int ballShootSpark = 1;
+    public static int ballIntakeSpark = 4;
+    public static int gearElevatorSpark = 3;
+    public static int gearClampSpark = 2;
 	
 }

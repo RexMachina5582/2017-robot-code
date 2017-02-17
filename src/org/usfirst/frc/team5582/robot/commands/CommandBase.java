@@ -24,11 +24,11 @@ public abstract class CommandBase extends Command {
 		ballIntake = BallIntake.getInstance();
 		gearElevator = GearElevator.getInstance();
 		gearGripper = GearGripper.getInstance();
-		//camera = Camera.getInstance();
 		ballStager = BallStager.getInstance();
 		ballShooter = BallShooter.getInstance();
 		oi = new OI();
 		oi.init();
+		//camera = Camera.getInstance();
 	}
 
     public CommandBase() {

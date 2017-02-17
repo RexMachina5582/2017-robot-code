@@ -2,20 +2,18 @@
 package org.usfirst.frc.team5582.robot.subsystems;
 
 import org.usfirst.frc.team5582.robot.*;
-import org.usfirst.frc.team5582.robot.commands.StageBall;
+import org.usfirst.frc.team5582.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  *
  */
 public class BallStager extends Subsystem {
 	
-	PWM ballLoadMotor;
+	Spark ballLoadMotor;
 
 	// First, some Singleton housekeeping. Make sure there is only one.	
 	public static BallStager instance;
@@ -32,18 +30,24 @@ public class BallStager extends Subsystem {
     
     public void initDefaultCommand() {
         //Set the default command for a subsystem here.
-        setDefaultCommand(new StageBall());
+        setDefaultCommand(new StopStager());
     }
     
     protected BallStager() {
-    		ballLoadMotor = new PWM(RobotMap.ballLoadPWM);
+    		ballLoadMotor = new Spark(RobotMap.ballLoadSpark);
     }
     
     public void turnStager() {
     	//scale the power here
-    	double power = 0.5;
+    	double power = -1;
     	
     	ballLoadMotor.setSpeed(power);
+    	
+    }
+    
+    public void stopStager() {
+    	
+    	ballLoadMotor.setSpeed(0);
     	
     }
     

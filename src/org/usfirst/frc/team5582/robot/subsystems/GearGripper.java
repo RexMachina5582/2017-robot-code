@@ -2,14 +2,14 @@ package org.usfirst.frc.team5582.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  *
  */
 public class GearGripper extends Subsystem {
 
-	PWM gripper;
+	Spark gripper;
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

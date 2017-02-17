@@ -4,16 +4,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5582.robot.RobotMap;
-import org.usfirst.frc.team5582.robot.commands.ElevateGear;
+import org.usfirst.frc.team5582.robot.commands.*;
 
-import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  *
  */
 public class GearElevator extends Subsystem {
 
-	PWM gearElevator;
+	Spark gearElevator;
 	
 	
     // Put methods for controlling this subsystem
@@ -34,12 +34,12 @@ public class GearElevator extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ElevateGear());
+        setDefaultCommand(new StopGearElevator());
     }
     
     protected GearElevator() {
     	
-    	gearElevator = new PWM(RobotMap.gearElevatorPWM);
+    	gearElevator = new Spark(RobotMap.gearElevatorSpark);
     	
     }
     
@@ -52,6 +52,12 @@ public class GearElevator extends Subsystem {
     public void dropGearLift() {
     	
     	gearElevator.setSpeed(-.5);
+    	
+    }
+    
+    public void stopMotion() {
+    	
+    	gearElevator.setSpeed(0);
     	
     }
     

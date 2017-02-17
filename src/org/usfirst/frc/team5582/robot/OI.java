@@ -38,7 +38,7 @@ public class OI {
 	public static XboxController xboxControllerTwo;
 	// Button Type
 	public static Button seekTarget;
-	public static Button getBallOffGround;
+	public static Button intakeBall;
 	public static Button elevateLift;
 	public static Button dropLift;
 	public static Button shootBall;
@@ -57,8 +57,8 @@ public class OI {
 		/** BUTTONS **/
 		seekTarget = xboxControllerOne.a;
 		seekTarget.whileHeld(new TargetRotate());
-		getBallOffGround = xboxControllerOne.b;
-		getBallOffGround.whileHeld(new IntakeBall());
+		intakeBall = xboxControllerOne.b;
+		intakeBall.whileHeld(new IntakeBall());
 		elevateLift = xboxControllerOne.x;
 		elevateLift.whileHeld(new ElevateGear());
 		dropLift = xboxControllerOne.y;

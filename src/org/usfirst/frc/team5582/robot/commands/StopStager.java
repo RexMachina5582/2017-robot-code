@@ -1,30 +1,25 @@
 package org.usfirst.frc.team5582.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team5582.robot.OI;
 
 /**
  *
  */
-public class ArcadeDrive extends CommandBase {
+public class StopStager extends CommandBase {
 
-	private int tankControl = 0;
-	
-    public ArcadeDrive() {
-    		requires(driveTrain);
+    public StopStager() {
+        // Use requires() here to declare subsystem dependencies
+        requires(ballStager);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        SmartDashboard.putData(this);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		driveTrain.arcadeDriveStickAxis(OI.xboxControllerOne.leftStick.getY(), 
-    		OI.xboxControllerOne.leftStick.getX());
-		
+    	
+    	ballStager.stopStager();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

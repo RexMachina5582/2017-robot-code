@@ -2,21 +2,18 @@
 package org.usfirst.frc.team5582.robot.subsystems;
 
 import org.usfirst.frc.team5582.robot.*;
-import org.usfirst.frc.team5582.robot.commands.IntakeBall;
+import org.usfirst.frc.team5582.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  *
  */
 public class BallIntake extends Subsystem {
 	
-	PWM ballIntake;
+	Spark ballIntake;
     
 
 	// First, some Singleton housekeeping. Make sure there is only one.	
@@ -34,12 +31,12 @@ public class BallIntake extends Subsystem {
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new IntakeBall());
+        setDefaultCommand(new StopIntake());
     }
     
     protected BallIntake() {
     	
-    	ballIntake = new PWM(RobotMap.ballIntakePWM);
+    	ballIntake = new Spark(RobotMap.ballIntakeSpark);
     	
     }
     
@@ -58,6 +55,12 @@ public class BallIntake extends Subsystem {
     public void opertateIntake(double speed) {
     	
     	ballIntake.setSpeed(speed);
+    	
+    }
+    
+    public void stopIntake() {
+    	
+    	ballIntake.setSpeed(0);
     	
     }
     
