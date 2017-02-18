@@ -10,6 +10,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
  *
@@ -22,6 +23,9 @@ public class DriveTrain extends Subsystem {
     //public AnalogInput ultrasonicSensor;
     public Encoder encoder;
     private double motorOutputValue = 0;
+    
+    // Testing the I-CubeX Touch Sensor (flat pad)
+    AnalogInput touchPad;
 
 	// First, some Singleton housekeeping. Make sure there is only one.	
 	public static DriveTrain instance;
@@ -48,6 +52,8 @@ public class DriveTrain extends Subsystem {
     		rightTalonB = new CANTalon(RobotMap.rightMotorCANB);
     		rexDrive = new RobotDrive(rightTalonB, rightTalonA, leftTalonB, leftTalonA);
     		rexDriveRear = new RobotDrive(rightTalonA, leftTalonA);
+    		
+    		touchPad = new AnalogInput(3);
     }
     
     public void tankDrive(double leftStickY, double rightStickY) {
@@ -58,7 +64,12 @@ public class DriveTrain extends Subsystem {
     		rexDrive.arcadeDrive(stick);
     }
     public void arcadeDriveStickAxis(double leftY, double leftX) {
-    		rexDrive.arcadeDrive(leftY, leftX);
+    	int raw, avgRaw;
+    	rexDrive.arcadeDrive(leftY, leftX);
+    	raw = touchPad.getValue();
+    	avgRaw = touchPad.getAverageValue();
+    	RexRobot.messageClient.publish("sensors/touch", 
+    			"touch pad: raw " + String.valueOf(raw) + ", avgRaw " + String.valueOf(avgRaw));
     }
     public void arcadeDriveSkidTurn(double leftMotor, double rightMotor) {
     		rexDrive.setLeftRightMotorOutputs(leftMotor, rightMotor);

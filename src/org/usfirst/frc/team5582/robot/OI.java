@@ -55,18 +55,18 @@ public class OI {
 		xboxControllerOne.setDeadZone(0.1);
 		//xboxControllerTwo.setDeadZone(0.1);
 		/** BUTTONS **/
-		seekTarget = xboxControllerOne.a;
-		seekTarget.whileHeld(new TargetRotate());
-		intakeBall = xboxControllerOne.b;
-		intakeBall.whileHeld(new IntakeBall());
-		elevateLift = xboxControllerOne.x;
-		elevateLift.whileHeld(new ElevateGear());
-		dropLift = xboxControllerOne.y;
-		dropLift.whileHeld(new DropGear());
-		shootBall = xboxControllerOne.lb;
-		shootBall.whileHeld(new ShootBall());
-		stageBall = xboxControllerOne.rb;
-		stageBall.whileHeld(new StageBall());
+//		seekTarget = xboxControllerOne.a;
+//		seekTarget.whileHeld(new TargetRotate());
+//		intakeBall = xboxControllerOne.b;
+//		intakeBall.whileHeld(new IntakeBall());
+//		elevateLift = xboxControllerOne.x;
+//		elevateLift.whileHeld(new ElevateGear());
+//		dropLift = xboxControllerOne.y;
+//		dropLift.whileHeld(new DropGear());
+//		shootBall = xboxControllerOne.lb;
+//		shootBall.whileHeld(new ShootBall());
+//		stageBall = xboxControllerOne.rb;
+//		stageBall.whileHeld(new StageBall());
 			
 		
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;

@@ -88,8 +88,8 @@ public class RexRobot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-    		if (autonomousCommand != null) autonomousCommand.start();
-    		if (autonomousBallArms != null) autonomousBallArms.start();
+//    		if (autonomousCommand != null) autonomousCommand.start();
+//    		if (autonomousBallArms != null) autonomousBallArms.start();
     		// autonomousWinch.start();
     }
 

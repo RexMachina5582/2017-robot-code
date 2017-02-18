@@ -13,19 +13,19 @@ public abstract class CommandBase extends Command {
 	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static Camera camera;
-	public static BallStager ballStager;
-	public static BallShooter ballShooter;
-	public static BallIntake ballIntake;
-	public static GearElevator gearElevator;
-	public static GearGripper gearGripper;
+//	public static BallStager ballStager;
+//	public static BallShooter ballShooter;
+//	public static BallIntake ballIntake;
+//	public static GearElevator gearElevator;
+//	public static GearGripper gearGripper;
 	
 	public static void init() {
 		driveTrain = DriveTrain.getInstance();
-		ballIntake = BallIntake.getInstance();
-		gearElevator = GearElevator.getInstance();
-		gearGripper = GearGripper.getInstance();
-		ballStager = BallStager.getInstance();
-		ballShooter = BallShooter.getInstance();
+//		ballIntake = BallIntake.getInstance();
+//		gearElevator = GearElevator.getInstance();
+//		gearGripper = GearGripper.getInstance();
+//		ballStager = BallStager.getInstance();
+//		ballShooter = BallShooter.getInstance();
 		oi = new OI();
 		oi.init();
 		//camera = Camera.getInstance();
