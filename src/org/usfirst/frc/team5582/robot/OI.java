@@ -44,6 +44,9 @@ public class OI {
 	public static Button shootBall;
 	public static Button stageBall;
 	
+	public static Button deployGripper;
+	public static Button releaseGripper;
+	
 	
 	public static void init()
 	{
@@ -51,7 +54,7 @@ public class OI {
 		
 		// Tank controls
 		xboxControllerOne = new XboxController(RobotMap.xboxControllerOne);
-		//xboxControllerTwo = new XboxController(RobotMap.xboxControllerTwo);
+		xboxControllerTwo = new XboxController(RobotMap.xboxControllerTwo);
 		xboxControllerOne.setDeadZone(0.1);
 		//xboxControllerTwo.setDeadZone(0.1);
 		/** BUTTONS **/
@@ -67,6 +70,12 @@ public class OI {
 		shootBall.whileHeld(new ShootBall());
 		stageBall = xboxControllerOne.rb;
 		stageBall.whileHeld(new StageBall());
+		
+		deployGripper = xboxControllerTwo.a;
+		deployGripper.whenPressed(new GripperDeploy());
+		releaseGripper = xboxControllerTwo.b;
+		releaseGripper.whenPressed(new GripperRelease());
+		
 			
 		
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;

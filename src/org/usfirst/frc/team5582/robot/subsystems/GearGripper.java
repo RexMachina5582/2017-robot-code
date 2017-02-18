@@ -2,14 +2,18 @@ package org.usfirst.frc.team5582.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Spark;
+
+import org.usfirst.frc.team5582.robot.RobotMap;
+import org.usfirst.frc.team5582.robot.commands.GripperDeploy;
+import org.usfirst.frc.team5582.robot.commands.GripperRelease;
+import edu.wpi.first.wpilibj.Servo;
 
 /**
  *
  */
 public class GearGripper extends Subsystem {
 
-	Spark gripper;
+	Servo gearClamp;
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -27,16 +31,21 @@ public class GearGripper extends Subsystem {
 			SmartDashboard.putData(instance);
 			return instance;
 		}
+	protected GearGripper() {
+    	gearClamp = new Servo(RobotMap.gearClampServo);
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        //setDefaultCommand(new GripperDeploy());
     }
     
-    public void clampGear() {
+    public void gripGear() {
+    	gearClamp.setAngle(80);
     }
     
     public void releaseGear() {
+    	gearClamp.setAngle(0);
     }
     
 }

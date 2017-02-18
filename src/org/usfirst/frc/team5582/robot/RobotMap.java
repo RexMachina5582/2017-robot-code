@@ -24,7 +24,8 @@ public class RobotMap {
     public static int ballLoadSpark = 0;
     public static int ballShootSpark = 1;
     public static int ballIntakeSpark = 4;
-    public static int gearElevatorSpark = 3;
-    public static int gearClampSpark = 2;
+    public static int gearElevatorSpark = 5;
+    public static int gearClampServo = 3;
+    public static int winchSpark = 2;
 	
 }
