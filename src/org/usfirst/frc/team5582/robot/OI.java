@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team5582.robot.subsystems.*;
 import org.usfirst.frc.team5582.robot.commands.*;
 import edu.wpi.first.wpilibj.buttons.Button;
-
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 
 /**
@@ -43,9 +43,11 @@ public class OI {
 	public static Button dropLift;
 	public static Button shootBall;
 	public static Button stageBall;
+	public static Button climbRope;
+	public static Button releaseRope;
 	
-	public static Button deployGripper;
-	public static Button releaseGripper;
+	public static Trigger deployGripper;
+	public static Trigger releaseGripper;
 	
 	
 	public static void init()
@@ -70,11 +72,15 @@ public class OI {
 		shootBall.whileHeld(new ShootBall());
 		stageBall = xboxControllerOne.rb;
 		stageBall.whileHeld(new StageBall());
+		climbRope = xboxControllerOne.start;
+		climbRope.whileHeld(new PullRope());
+		releaseRope = xboxControllerOne.back;
+		releaseRope.whileHeld(new ReleaseRope());
 		
-		deployGripper = xboxControllerTwo.a;
-		deployGripper.whenPressed(new GripperDeploy());
-		releaseGripper = xboxControllerTwo.b;
-		releaseGripper.whenPressed(new GripperRelease());
+		deployGripper = xboxControllerOne.lt;
+		deployGripper.whenActive(new GripperDeploy());
+		releaseGripper = xboxControllerOne.rt;
+		releaseGripper.whenActive(new GripperRelease());
 		
 			
 		

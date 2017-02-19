@@ -42,7 +42,7 @@ public static BallShooter getInstance() {
     }
     
     public void spinMotor(){
-    	double power = 0.9;
+    	double power = 0.75;
     	
     	ballShooterMotor.setSpeed(power);
     }

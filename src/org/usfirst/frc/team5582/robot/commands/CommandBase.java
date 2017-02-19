@@ -18,6 +18,7 @@ public abstract class CommandBase extends Command {
 	public static BallIntake ballIntake;
 	public static GearElevator gearElevator;
 	public static GearGripper gearGripper;
+	public static RopePuller ropePuller;
 	
 	public static void init() {
 		driveTrain = DriveTrain.getInstance();
@@ -26,6 +27,7 @@ public abstract class CommandBase extends Command {
 		gearGripper = GearGripper.getInstance();
 		ballStager = BallStager.getInstance();
 		ballShooter = BallShooter.getInstance();
+		ropePuller = RopePuller.getInstance();
 		oi = new OI();
 		oi.init();
 		//camera = Camera.getInstance();
