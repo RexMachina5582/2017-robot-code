@@ -8,8 +8,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Counter;
+
+import com.kauailabs.navx.frc.AHRS;
 
 /**
  *
@@ -17,11 +23,24 @@ import edu.wpi.first.wpilibj.Encoder;
 public class DriveTrain extends Subsystem {
 	
 	RobotDrive rexDrive;
-	RobotDrive rexDriveRear;
 	CANTalon leftTalonA, leftTalonB, rightTalonA, rightTalonB;
+	public static AHRS ahrs;
+	PIDController turnController;
+	double rotateToAngleRate;
+	
+    static final double kP = 0.03;
+    static final double kI = 0.00;
+    static final double kD = 0.00;
+    static final double kF = 0.00;
+
+    static final double kToleranceDegrees = 2.0f;    
+    
+    static final double kTargetAngleDegrees = 90.0f;
+
     //public AnalogInput ultrasonicSensor;
-    public Encoder encoder;
     private double motorOutputValue = 0;
+    public static DigitalInput leftEncoder;
+    public static Counter leftWheelCounter;
 
 	// First, some Singleton housekeeping. Make sure there is only one.	
 	public static DriveTrain instance;
@@ -47,7 +66,22 @@ public class DriveTrain extends Subsystem {
     		rightTalonA = new CANTalon(RobotMap.rightMotorCANA);
     		rightTalonB = new CANTalon(RobotMap.rightMotorCANB);
     		rexDrive = new RobotDrive(rightTalonB, rightTalonA, leftTalonB, leftTalonA);
-    		rexDriveRear = new RobotDrive(rightTalonA, leftTalonA);
+    		leftEncoder = new DigitalInput(RobotMap.leftDrivetrainEncoder);
+    		leftWheelCounter = new Counter(leftEncoder);
+    		leftWheelCounter.setDistancePerPulse(3.14);
+    		leftWheelCounter.setMaxPeriod(1.1);
+    		leftWheelCounter.setSamplesToAverage(5);
+    		try {
+    			/***********************************************************************
+    			 * navX-MXP:
+    			 * - Communication via RoboRIO MXP (SPI, I2C, TTL UART) and USB.            
+    			 * - See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+    			 ************************************************************************/
+                ahrs = new AHRS(SPI.Port.kMXP); 
+            } catch (RuntimeException ex ) {
+                DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+            }
+
     }
     
     public void tankDrive(double leftStickY, double rightStickY) {
