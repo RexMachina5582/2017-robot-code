@@ -23,8 +23,8 @@ public class RobotMap {
     public static int rightMotorCANB = 4;
     
     // PWM
-    public static int ballLoadSpark = 0;
-    public static int ballShootSpark = 1;
+    public static int ballLoadSpark = 1;
+    public static int ballShootSpark = 0;
     public static int winchSpark = 2;
     public static int gearClampServo = 3;
     public static int ballIntakeSpark = 4;
