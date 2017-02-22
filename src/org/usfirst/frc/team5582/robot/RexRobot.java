@@ -31,7 +31,6 @@ import org.usfirst.frc.team5582.robot.commands.*;
 
  */
 
-//TODO Get camera feed for smartdashboard
 public class RexRobot extends IterativeRobot {
 
     Command firstCommand;
@@ -40,10 +39,6 @@ public class RexRobot extends IterativeRobot {
     Command autonomousWinch;
     Command autonomousBallArms;
     public static MessageClient messageClient;
-    CameraServer cameraServer;
-    CameraServer camera;
-    //USBCamera cameraFront;
-    //USBCamera cameraRear;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -53,25 +48,7 @@ public class RexRobot extends IterativeRobot {
     	messageClient = new MessageClient("tcp://localhost:5888", "rex/vision/telemetry");
 		messageClient.connect();
 		CommandBase.init();
-		/*
-	 	  camera = CameraServer.getInstance();
-	   	  camera.setQuality(12);
-	  	  camera.startAutomaticCapture("cam1");
-	  	  */
-	  	  
-		//cameraFront = new USBCamera("cam0");
-		//cameraRear = new USBCamera("cam1");
-		//cameraRear.setFPS(12);
-		//cameraRear.updateSettings();
-		//cameraRear.openCamera();
-		//cameraFront.setFPS(12);
-		//cameraFront.updateSettings();
-		//cameraFront.openCamera();
-		//cameraServer = CameraServer.getInstance();
-		//cameraServer.startAutomaticCapture(cameraFront);
-		//cameraServer.startAutomaticCapture(cameraRear);
-		
-		
+		CameraServer.getInstance().startAutomaticCapture();
    }
 	
 	/**
@@ -102,7 +79,6 @@ public class RexRobot extends IterativeRobot {
 
     public void teleopInit() {
         Scheduler.getInstance().add(firstCommand);
-        //Scheduler.getInstance().add(cameraCommand);
         SmartDashboard.putData(Scheduler.getInstance());
     }
 

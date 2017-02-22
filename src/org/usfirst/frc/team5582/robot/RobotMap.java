@@ -32,5 +32,14 @@ public class RobotMap {
     
     // Digital Inputs
     public static int leftDrivetrainEncoder = 0;
+    public static int rightDrivetrainEncoder = 1;
+    public static int laserGearSensor = 2;
+    public static int gearElevatorEncoderPhaseB = 8;
+    public static int gearElevatorEncoderPhaseA = 9;
+    
+    // Analog Inputs
+    public static int leftUltrasonic = 0;
+    public static int rightUltrasonic = 1;
+    public static int gearElevatorUpperLimitSensor = 2;
 	
 }

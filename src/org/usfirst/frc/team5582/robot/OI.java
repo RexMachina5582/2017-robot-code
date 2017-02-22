@@ -64,9 +64,9 @@ public class OI {
 		seekTarget.whileHeld(new TargetRotate());
 		intakeBall = xboxControllerOne.b;
 		intakeBall.whileHeld(new IntakeBall());
-		elevateLift = xboxControllerOne.x;
+		elevateLift = xboxControllerOne.y;
 		elevateLift.whileHeld(new ElevateGear());
-		dropLift = xboxControllerOne.y;
+		dropLift = xboxControllerOne.x;
 		dropLift.whileHeld(new DropGear());
 		shootBall = xboxControllerOne.lb;
 		shootBall.whileHeld(new ShootBall());

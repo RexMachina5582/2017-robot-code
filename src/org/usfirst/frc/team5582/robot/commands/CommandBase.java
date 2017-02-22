@@ -12,7 +12,6 @@ public abstract class CommandBase extends Command {
 	
 	public static OI oi;
 	public static DriveTrain driveTrain;
-	public static Camera camera;
 	public static BallStager ballStager;
 	public static BallShooter ballShooter;
 	public static BallIntake ballIntake;
@@ -30,7 +29,6 @@ public abstract class CommandBase extends Command {
 		ropePuller = RopePuller.getInstance();
 		oi = new OI();
 		oi.init();
-		//camera = Camera.getInstance();
 	}
 
     public CommandBase() {
