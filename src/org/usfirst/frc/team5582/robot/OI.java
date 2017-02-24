@@ -48,6 +48,7 @@ public class OI {
 	
 	public static Trigger deployGripper;
 	public static Trigger releaseGripper;
+	public static Boolean autoPegSwitch;
 	
 	
 	public static void init()
@@ -82,7 +83,8 @@ public class OI {
 		releaseGripper = xboxControllerOne.rt;
 		releaseGripper.whenActive(new GripperRelease());
 		
-			
+		/** PANEL **/
+		autoPegSwitch = true;
 		
 		//EXAMPLE: topLiftUp = xboxControllerTwo.y;
 		

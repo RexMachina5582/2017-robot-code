@@ -20,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 import org.usfirst.frc.team5582.robot.MessageClient;
 
 import org.usfirst.frc.team5582.robot.commands.*;
+import org.usfirst.frc.team5582.robot.OI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,6 +39,8 @@ public class RexRobot extends IterativeRobot {
     Command cameraCommand;
     Command autonomousWinch;
     Command autonomousBallArms;
+    Command autoLeftGearPeg;
+    Command autoRightGearPeg;
     public static MessageClient messageClient;
 
     /**
@@ -65,9 +68,14 @@ public class RexRobot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-    		if (autonomousCommand != null) autonomousCommand.start();
-    		if (autonomousBallArms != null) autonomousBallArms.start();
-    		// autonomousWinch.start();
+        if (autonomousCommand != null) autonomousCommand.start();
+        //if (autonomousBallArms != null) autonomousBallArms.start();
+        if (OI.autoPegSwitch) {
+            if (autoLeftGearPeg != null) autoLeftGearPeg.start();
+        } else {
+            if (autoRightGearPeg != null) autoLeftGearPeg.start();
+        }
+        // autonomousWinch.start();
     }
 
     /**

@@ -97,6 +97,19 @@ public class DriveTrain extends Subsystem {
     public void stopDrive() {
     		rexDrive.setLeftRightMotorOutputs(0, 0);
     }
+    
+    public void goDrive(double speed) {
+    	rexDrive.setLeftRightMotorOutputs(-speed, speed);
+    }
+
+    public void turn (boolean rightTurn, double speed) {
+		if (rightTurn) {
+			rexDrive.setLeftRightMotorOutputs(0, speed);
+		} else {
+			rexDrive.setLeftRightMotorOutputs(speed, 0);
+		}
+	}
+    
     public void resetRamp() {
     		motorOutputValue = 0;
     }

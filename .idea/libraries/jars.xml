@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="jars">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/jars/mqttv3-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/gson-2.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/cscore.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/navx_frc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/NetworkTables.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/mqtt-client-0.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/opencv.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/CTRLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/build/jars/WPILib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
