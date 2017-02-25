@@ -41,5 +41,8 @@ public class RobotMap {
     public static int leftUltrasonic = 0;
     public static int rightUltrasonic = 1;
     public static int gearElevatorUpperLimitSensor = 2;
+
+    // RELAY
+    public static int lightRelay = 0;
 	
 }

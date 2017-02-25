@@ -63,6 +63,7 @@ public class DriveTrain extends Subsystem {
 		rightWheelCounter.setDistancePerPulse(3.14);
 		rightWheelCounter.setMaxPeriod(1.1);
 		rightWheelCounter.setSamplesToAverage(5);
+		
     }
     
     public void tankDrive(double leftStickY, double rightStickY) {
@@ -72,9 +73,11 @@ public class DriveTrain extends Subsystem {
     public void arcadeDriveSingleStick(Joystick stick) {
     		rexDrive.arcadeDrive(stick);
     }
+    
     public void arcadeDriveStickAxis(double leftY, double leftX) {
     		rexDrive.arcadeDrive(leftY, leftX);
     }
+    
     public void arcadeDriveSkidTurn(double leftMotor, double rightMotor) {
     		rexDrive.setLeftRightMotorOutputs(leftMotor, rightMotor);
     }
@@ -86,6 +89,7 @@ public class DriveTrain extends Subsystem {
     		motorOutputValue += change;
     		rexDrive.setLeftRightMotorOutputs(-motorOutputValue, -motorOutputValue);
     }
+    
     public void arcadeDriveAutonomous(double finalPower) {
     		double limit = 0.08;
 		double change = finalPower - motorOutputValue;
@@ -93,7 +97,8 @@ public class DriveTrain extends Subsystem {
 		else if (change < -limit) change = -limit;
 		motorOutputValue += change;
 		rexDrive.setLeftRightMotorOutputs(-motorOutputValue, -motorOutputValue);
-}
+    }
+    
     public void stopDrive() {
     		rexDrive.setLeftRightMotorOutputs(0, 0);
     }
@@ -101,7 +106,7 @@ public class DriveTrain extends Subsystem {
     public void goDrive(double speed) {
     	rexDrive.setLeftRightMotorOutputs(-speed, speed);
     }
-
+    
     public void turn (boolean rightTurn, double speed) {
 		if (rightTurn) {
 			rexDrive.setLeftRightMotorOutputs(0, speed);

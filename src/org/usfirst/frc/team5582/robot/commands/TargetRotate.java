@@ -2,17 +2,21 @@ package org.usfirst.frc.team5582.robot.commands;
 
 import org.json.simple.JSONObject;
 import org.usfirst.frc.team5582.robot.RexRobot;
-
+import org.usfirst.frc.team5582.robot.RobotMap;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Relay;
 
 /**
  *
  */
 public class TargetRotate extends CommandBase {
 	private double offset;
-	
+
+	// For turning on light
+	Relay lightRelay;
+
 	//Major is the large rotation phase, and minor is the small
 	private double MAJOR_SPEED = .40;
 	private double MINOR_SPEED = .20;
@@ -32,6 +36,8 @@ public class TargetRotate extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+		lightRelay = new Relay(RobotMap.lightRelay);
+		lightRelay.set(Relay.Value.kOn);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -102,7 +108,9 @@ public class TargetRotate extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    		driveTrain.stopDrive();
+
+		lightRelay.set(Relay.Value.kOff);
+		driveTrain.stopDrive();
     }
 
     // Called when another command which requires one or more of the same
