@@ -38,11 +38,10 @@ public class RobotMap {
     public static int gearElevatorEncoderPhaseA = 9;
     
     // Analog Inputs
-    public static int leftUltrasonic = 0;
-    public static int rightUltrasonic = 1;
+    public static int frontUltrasonic = 0;
     public static int gearElevatorUpperLimitSensor = 2;
 
     // RELAY
-    public static int lightRelay = 0;
+    public static int lightRelay = 1;
 	
 }

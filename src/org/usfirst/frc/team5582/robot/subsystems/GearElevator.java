@@ -22,6 +22,8 @@ public class GearElevator extends Subsystem {
 	public AnalogInput upperLimitSensor;
 	public Encoder elevatorEncoder;
 	
+	static final int kLowerGearEncoderLimit = 1050;
+	
 	// First, some Singleton housekeeping. Make sure there is only one.	
 	public static GearElevator instance;
 	
@@ -57,37 +59,49 @@ public class GearElevator extends Subsystem {
     	int avgRaw;
     	avgRaw = upperLimitSensor.getAverageValue();
     	double speed;
+    	double distance;
+    	
+    	// Inverting the distance means we are spooling with strap behind spool
+    	distance = elevatorEncoder.getDistance() * -1.0;
+    	
+    	RexRobot.messageClient.publish("sensors/limit", 
+    			"limitPadAvgRaw : " + String.valueOf(avgRaw));
+    	RexRobot.messageClient.publish("sensors/gearEncoder", 
+    			"distance : " + String.valueOf(distance));
     	
     	// Have we triggered the limit sensor?
-    	if (avgRaw > 400) {
+    	if (avgRaw > 300) {
     		speed = 0;
+    		elevatorEncoder.reset();
     	} else {
-    		speed = 0.8;
+    		speed = 0.9;
     	}
     	
     	// Until we have the sensor installed, override the conditional speed with constant
-    	speed = 0.8;
+//    	speed = 0.9;
     	
-    	gearElevator.setSpeed(-speed);
-
-    	double distance;
-    	distance = elevatorEncoder.getDistance();
-    	RexRobot.messageClient.publish("sensors/gearEncoder", 
-    			"distance : " + String.valueOf(distance));
+    	// Positive when strap is behind spool, negative when in front
+    	gearElevator.setSpeed(speed);
     	
     }
     
     public void dropGearLift() {
     	
     	double speed = 0.5;
-    	
-    	gearElevator.setSpeed(speed);
-    	
     	double distance;
-    	distance = elevatorEncoder.getDistance();
+
+    	// Inverting the distance means we are spooling with strap behind spool
+    	distance = elevatorEncoder.getDistance() * -1.0;
     	RexRobot.messageClient.publish("sensors/gearEncoder", 
     			"distance : " + String.valueOf(distance));
+     	
+    	// Lower limit enforced by encoder reading
+    	if (distance > kLowerGearEncoderLimit) {
+    		speed = 0;
+    	}
     	
+    	// Negative when strap is behind spool, positive when in front
+    	gearElevator.setSpeed(-speed); 	
     }
     
     public void stopMotion() {

@@ -40,11 +40,11 @@ public class RopePuller extends Subsystem {
     }
     
     public void pull() {
-    	winchMotor.set(1.0);
+    	winchMotor.set(-1.0);
     }
     
     public void release() {
-    	winchMotor.set(-0.4);
+    	winchMotor.set(0.4);
     }
     
     public void stop() {

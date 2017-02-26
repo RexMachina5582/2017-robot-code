@@ -63,6 +63,8 @@ public class OI {
 		/** BUTTONS **/
 		seekTarget = xboxControllerOne.a;
 		seekTarget.whileHeld(new TargetRotate());
+		seekTarget.whenPressed(new ManageLight(Boolean.TRUE));
+		seekTarget.whenReleased(new ManageLight(Boolean.FALSE));
 		intakeBall = xboxControllerOne.b;
 		intakeBall.whileHeld(new IntakeBall());
 		elevateLift = xboxControllerOne.y;
