@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.Relay;
 public class DriveTrain extends Subsystem {
 	
 	private double limit = 0.004;	// for speed ramp-up
-    private double motorOutputValue = 0;
+    private double rampedSpeed = 0;
 
     RobotDrive rexDrive;
 	CANTalon leftTalonA, leftTalonB, rightTalonA, rightTalonB;
@@ -109,20 +109,20 @@ public class DriveTrain extends Subsystem {
     }
 
     public void arcadeDriveAutonomous(double finalPower, double limit) {
-    		double change = finalPower - motorOutputValue;
+    		double change = finalPower - rampedSpeed;
     		if (change > limit) change = limit;
     		else if (change < -limit) change = -limit;
-    		motorOutputValue += change;
-    		rexDrive.setLeftRightMotorOutputs(-motorOutputValue, -motorOutputValue);
+    		rampedSpeed += change;
+    		rexDrive.setLeftRightMotorOutputs(-rampedSpeed, -rampedSpeed);
     }
     
     public void arcadeDriveAutonomous(double finalPower) {
     		double limit = 0.08;
-		double change = finalPower - motorOutputValue;
+		double change = finalPower - rampedSpeed;
 		if (change > limit) change = limit;
 		else if (change < -limit) change = -limit;
-		motorOutputValue += change;
-		rexDrive.setLeftRightMotorOutputs(-motorOutputValue, -motorOutputValue);
+		rampedSpeed += change;
+		rexDrive.setLeftRightMotorOutputs(-rampedSpeed, -rampedSpeed);
     }
     
     public void stopDrive() {
@@ -131,10 +131,11 @@ public class DriveTrain extends Subsystem {
     
     public void goDrive(double speed) {
     	calcRamp(speed);
-    	rexDrive.setLeftRightMotorOutputs(-motorOutputValue, -motorOutputValue);
+    	rexDrive.setLeftRightMotorOutputs(-rampedSpeed, -rampedSpeed);
     }
     
     public void goStraightRamp(double speed) {
+    	double speedPercentAdjust = 0.95;
     	/*
     	 *  Caution: your command must reset encoders to zero before calling this method,
     	 *  or it will spin the robot in a circle.
@@ -146,11 +147,15 @@ public class DriveTrain extends Subsystem {
 		double leftCount = getLeftDistance();
 		double rightCount = getRightDistance();
 		if (Math.abs(leftCount - rightCount) > 2) {
-			// TODO: make an adjustment!
-			rexDrive.setLeftRightMotorOutputs(motorOutputValue, motorOutputValue);
+			double valueOff = leftCount - rightCount;
+			if (valueOff > 0) {
+				rexDrive.setLeftRightMotorOutputs(rampedSpeed*speedPercentAdjust, rampedSpeed);
+			} else {
+				rexDrive.setLeftRightMotorOutputs(rampedSpeed, rampedSpeed*speedPercentAdjust);
+			}
 
 		} else {
-			rexDrive.setLeftRightMotorOutputs(motorOutputValue, motorOutputValue);
+			rexDrive.setLeftRightMotorOutputs(rampedSpeed, rampedSpeed);
 		}
 		
     }
@@ -159,21 +164,21 @@ public class DriveTrain extends Subsystem {
     	// Ramps up to target speed
 		calcRamp(speed);		
 		if (rightTurn) {
-			rexDrive.setLeftRightMotorOutputs(motorOutputValue, 0);
+			rexDrive.setLeftRightMotorOutputs(rampedSpeed, 0);
 		} else {
-			rexDrive.setLeftRightMotorOutputs(0, motorOutputValue);
+			rexDrive.setLeftRightMotorOutputs(0, rampedSpeed);
 		}
 	}
     
     public void calcRamp(double speed) {
-		double change = speed - motorOutputValue;
+		double change = speed - rampedSpeed;
 		if (change > limit) change = limit;
 		else if (change < -limit) change = -limit;
-		motorOutputValue += change;
+		rampedSpeed += change;
     }
     
     public void resetRamp() {
-    		motorOutputValue = 0;
+    		rampedSpeed = 0;
     }
     
     public void resetDistance() {
