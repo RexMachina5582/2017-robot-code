@@ -23,7 +23,8 @@ public class DriveBackVariablyDistance extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	driveTrain.rightWheelCounter.reset();
+    	driveTrain.leftWheelCounter.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,7 +46,12 @@ public class DriveBackVariablyDistance extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if (driveTrain.leftWheelCounter.getDistance() > fastDist && 
+    			driveTrain.rightWheelCounter.getDistance() > fastDist) {
+    		return true;
+    	} else {
+        	return false;
+    	}
     }
 
     // Called once after isFinished returns true

@@ -21,11 +21,11 @@ public class AutoLeftGearPeg extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
     	
-    	addSequential(new DriveDistance(30, .5));
-    	addSequential(new TurnRobotLeft(10, .5));
+    	addSequential(new DriveDistance(30, .5)); // isFinished correct and init reset
+    	addSequential(new TurnRobotLeft(10, .5)); // isFinished correct and init reset
     	addSequential(new TargetRotate());
     	// new SenseDistanceLeft();
-    	addSequential(new DriveBackVariablyDistance(6, 30, .2, .7));
+    	addSequential(new DriveBackVariablyDistance(6, 30, .2, .7)); // isFinished correct and init reset
     }
 
     // Called repeatedly when this Command is scheduled to run
