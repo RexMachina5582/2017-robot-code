@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TargetRotate extends CommandBase {
+public class AutoTargetRotate extends CommandBase {
 	private double offset;
 
 	//Major is the large rotation phase, and minor is the small
@@ -24,13 +24,14 @@ public class TargetRotate extends CommandBase {
 	FloatInput errorInput;
 	PIDOutput rotateOutput;
 	
-	public TargetRotate() {
+	public AutoTargetRotate() {
     	requires(driveTrain);
     	
     }
 	
     // Called just before this Command runs the first time
     protected void initialize() {
+    	driveTrain.lightOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -102,12 +103,12 @@ public class TargetRotate extends CommandBase {
     // Called once after isFinished returns true
     protected void end() {
 		driveTrain.stopDrive();
+		driveTrain.lightOff();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    		driveTrain.stopDrive();
     		end();
     }
 }

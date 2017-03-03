@@ -8,6 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+import java.awt.image.DataBufferShort;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -20,6 +24,7 @@ import org.json.simple.parser.JSONParser;
 import org.usfirst.frc.team5582.robot.MessageClient;
 
 import org.usfirst.frc.team5582.robot.commands.*;
+import org.usfirst.frc.team5582.robot.commands.macros.*;
 import org.usfirst.frc.team5582.robot.OI;
 
 /**
@@ -36,22 +41,34 @@ public class RexRobot extends IterativeRobot {
 
     Command firstCommand;
     Command autonomousCommand;
+    SendableChooser autoChooser;
+    String[] autoChoices;
     Command cameraCommand;
     Command autonomousWinch;
     Command autonomousBallArms;
     Command autoLeftGearPeg;
     Command autoRightGearPeg;
     public static MessageClient messageClient;
+    SmartDashboard dash;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	dash = new SmartDashboard();
     	messageClient = new MessageClient("tcp://localhost:5888", "rex/vision/telemetry");
 		messageClient.connect();
 		CommandBase.init();
 		CameraServer.getInstance().startAutomaticCapture();
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Simple drive forward", new AutoDriveDistance(20, 0.6));
+		autoChooser.addObject("Station 3: peg to left", new AutoLeftGearPeg());
+		autoChoices = new String[]{
+				"simple",
+				"station 3"
+		};
+		dash.putStringArray("Auto List", autoChoices);
    }
 	
 	/**
@@ -68,14 +85,23 @@ public class RexRobot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        if (autonomousCommand != null) autonomousCommand.start();
-        //if (autonomousBallArms != null) autonomousBallArms.start();
-        if (OI.autoPegSwitch) {
-            if (autoLeftGearPeg != null) autoLeftGearPeg.start();
-        } else {
-            if (autoRightGearPeg != null) autoLeftGearPeg.start();
-        }
-        // autonomousWinch.start();
+    	
+    	String autoSelection = new String(dash.getString("Auto Selector", "simple"));
+    	SmartDashboard.putString("Autonomous mode", autoSelection);    	
+
+    	if (autoSelection.equals("station 3")) {
+    		autonomousCommand = new AutoLeftGearPeg();
+    	} else {
+    		autonomousCommand = new AutoDriveDistance(20, 0.6);
+    	}
+//    	autonomousCommand = (Command) autoChooser.getSelected();
+    	autonomousCommand.start();
+
+//    	if (OI.autoPegSwitch) {
+//            if (autoLeftGearPeg != null) autoLeftGearPeg.start();
+//        } else {
+//            if (autoRightGearPeg != null) autoLeftGearPeg.start();
+//        }
     }
 
     /**

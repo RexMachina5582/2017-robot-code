@@ -1,50 +1,19 @@
 package org.usfirst.frc.team5582.robot.commands.macros;
 
-import org.usfirst.frc.team5582.robot.commands.CommandBase;
 import org.usfirst.frc.team5582.robot.commands.*;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
-
-
-/**
- *
- */
 public class AutoLeftGearPeg extends CommandGroup {
 
     public AutoLeftGearPeg() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
+    	addSequential(new AutoDriveDistance(20, .5)); 
+    	addSequential(new AutoTurnRobotLeft(15, .5));
     	
-    	addSequential(new DriveDistance(30, .5)); // isFinished correct and init reset
-    	addSequential(new TurnRobotLeft(10, .5)); // isFinished correct and init reset
-    	addSequential(new TargetRotate());
-    	// new SenseDistanceLeft();
-    	addSequential(new DriveBackVariablyDistance(6, 30, .2, .7)); // isFinished correct and init reset
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    	// Leave these next 3 off for testing on Frank
+//    	addSequential(new AutoTargetRotate());
+//    	addSequential(new AutoDriveToRange(100, 0.8));
+//    	addSequential(new AutoHangGearOnPeg());
     	
-    	
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
+    	addSequential(new AutoReverseDriveVariableDistance(6, 30, .2, .7)); 
     }
 }

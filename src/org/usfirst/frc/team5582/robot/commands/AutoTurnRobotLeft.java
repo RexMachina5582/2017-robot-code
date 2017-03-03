@@ -1,42 +1,43 @@
 package org.usfirst.frc.team5582.robot.commands;
 
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveDistance extends CommandBase {
+public class AutoTurnRobotLeft extends CommandBase {
 
-	private static double dist;
-	private static double classSpeed;
+	private static double targetTurnDist;
+	private static double targetTurnSpeed;
 	
-    public DriveDistance(double distance, double speed) {
+    public AutoTurnRobotLeft(double turnDistance, double turnSpeed) {
         // Use requires() here to declare subsystem dependencies
         requires(driveTrain);
-        dist = distance;
-        classSpeed = speed;
+        targetTurnDist = turnDistance;
+        targetTurnSpeed = turnSpeed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	driveTrain.leftWheelCounter.reset();
+    	driveTrain.resetDistance();
+    	driveTrain.resetRamp();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	if (driveTrain.leftWheelCounter.getDistance() < dist) {
-    		driveTrain.goDrive(classSpeed);
-    	}
-    	
+		driveTrain.turn(false, targetTurnSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (driveTrain.leftWheelCounter.getDistance() >= dist) {
-    		return true;
+    	double actualDistance = driveTrain.getLeftDistance();
+    	SmartDashboard.putNumber("AutoTurn target distance", targetTurnDist);
+    	SmartDashboard.putNumber("AutoTurn actual distance", actualDistance);
+
+    	if (actualDistance < targetTurnDist) {
+    		return false;
     	} else {
-    		return false;	
+        	return true;
     	}
     }
 

@@ -3,6 +3,7 @@ package org.usfirst.frc.team5582.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team5582.robot.subsystems.*;
 import org.usfirst.frc.team5582.robot.commands.*;
+import org.usfirst.frc.team5582.robot.commands.macros.*;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
@@ -62,9 +63,8 @@ public class OI {
 		//xboxControllerTwo.setDeadZone(0.1);
 		/** BUTTONS **/
 		seekTarget = xboxControllerOne.a;
-		seekTarget.whileHeld(new TargetRotate());
-		seekTarget.whenPressed(new ManageLight(Boolean.TRUE));
-		seekTarget.whenReleased(new ManageLight(Boolean.FALSE));
+		// seekTarget.whileHeld(new AutoTargetRotate());
+		seekTarget.whenPressed(new AutoLeftGearPeg());
 		intakeBall = xboxControllerOne.b;
 		intakeBall.whileHeld(new IntakeBall());
 		elevateLift = xboxControllerOne.y;

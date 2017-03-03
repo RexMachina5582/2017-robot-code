@@ -20,11 +20,13 @@ import edu.wpi.first.wpilibj.Relay;
  */
 public class DriveTrain extends Subsystem {
 	
-	RobotDrive rexDrive;
+	private double limit = 0.004;	// for speed ramp-up
+    private double motorOutputValue = 0;
+
+    RobotDrive rexDrive;
 	CANTalon leftTalonA, leftTalonB, rightTalonA, rightTalonB;
 
     public AnalogInput ultrasonicSensor;
-    private double motorOutputValue = 0;
     public static DigitalInput leftEncoder;
     public static Counter leftWheelCounter;
     public static DigitalInput rightEncoder;
@@ -92,6 +94,10 @@ public class DriveTrain extends Subsystem {
     }
     
     public void arcadeDriveStickAxis(double leftY, double leftX) {
+    		// We get distance just so it shows on dashboard
+    		double distance = getLeftDistance();
+    		distance = getRightDistance();
+    		
     		rexDrive.arcadeDrive(leftY, leftX);
     		// Distance avg value is around 100 at min range (13 in) and about 200 at 4 feet
 //    		RexRobot.messageClient.publish("sensors/distance",
@@ -124,19 +130,67 @@ public class DriveTrain extends Subsystem {
     }
     
     public void goDrive(double speed) {
-    	rexDrive.setLeftRightMotorOutputs(-speed, speed);
+    	calcRamp(speed);
+    	rexDrive.setLeftRightMotorOutputs(-motorOutputValue, -motorOutputValue);
+    }
+    
+    public void goStraightRamp(double speed) {
+    	/*
+    	 *  Caution: your command must reset encoders to zero before calling this method,
+    	 *  or it will spin the robot in a circle.
+    	 */
+    	
+    	// Ramps up to target speed
+		calcRamp(speed);		
+		// Use encoders to stay straight by adjusting calculated output value
+		double leftCount = getLeftDistance();
+		double rightCount = getRightDistance();
+		if (Math.abs(leftCount - rightCount) > 2) {
+			// TODO: make an adjustment!
+			rexDrive.setLeftRightMotorOutputs(motorOutputValue, motorOutputValue);
+
+		} else {
+			rexDrive.setLeftRightMotorOutputs(motorOutputValue, motorOutputValue);
+		}
+		
     }
     
     public void turn (boolean rightTurn, double speed) {
+    	// Ramps up to target speed
+		calcRamp(speed);		
 		if (rightTurn) {
-			rexDrive.setLeftRightMotorOutputs(0, speed);
+			rexDrive.setLeftRightMotorOutputs(motorOutputValue, 0);
 		} else {
-			rexDrive.setLeftRightMotorOutputs(speed, 0);
+			rexDrive.setLeftRightMotorOutputs(0, motorOutputValue);
 		}
 	}
     
+    public void calcRamp(double speed) {
+		double change = speed - motorOutputValue;
+		if (change > limit) change = limit;
+		else if (change < -limit) change = -limit;
+		motorOutputValue += change;
+    }
+    
     public void resetRamp() {
     		motorOutputValue = 0;
+    }
+    
+    public void resetDistance() {
+    	leftWheelCounter.reset();
+    	rightWheelCounter.reset();
+    }
+    
+    public double getLeftDistance() {
+    	double distance = leftWheelCounter.getDistance();
+    	SmartDashboard.putNumber("Drivetrain left distance", distance);    	
+    	return distance;
+    }
+    
+    public double getRightDistance() {
+    	double distance = rightWheelCounter.getDistance();
+    	SmartDashboard.putNumber("Drivetrain right distance", distance);    	
+    	return distance;
     }
     
 }
