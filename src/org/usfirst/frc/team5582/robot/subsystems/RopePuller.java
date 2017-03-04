@@ -44,7 +44,8 @@ public class RopePuller extends Subsystem {
     }
     
     public void release() {
-    	winchMotor.set(0.4);
+		// Don't release the rope through code. It is mechanically dangerous.
+    	//winchMotor.set(0.4);
     }
     
     public void stop() {

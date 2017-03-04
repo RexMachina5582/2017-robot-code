@@ -77,8 +77,9 @@ public class OI {
 		stageBall.whileHeld(new StageBall());
 		climbRope = xboxControllerOne.start;
 		climbRope.whileHeld(new PullRope());
-		releaseRope = xboxControllerOne.back;
-		releaseRope.whileHeld(new ReleaseRope());
+		// Don't release the rope through code. It is mechanically dangerous.
+//		releaseRope = xboxControllerOne.back;
+//		releaseRope.whileHeld(new ReleaseRope());
 		
 		deployGripper = xboxControllerOne.lt;
 		deployGripper.whenActive(new GripperDeploy());
