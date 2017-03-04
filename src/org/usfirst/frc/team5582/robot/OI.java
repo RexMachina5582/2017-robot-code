@@ -64,7 +64,8 @@ public class OI {
 		/** BUTTONS **/
 		seekTarget = xboxControllerOne.a;
 		// seekTarget.whileHeld(new AutoTargetRotate());
-		seekTarget.whenPressed(new AutoLeftGearPeg());
+		// seekTarget.whenPressed(new AutoLeftGearPeg());
+		seekTarget.whenPressed(new GetGear());
 		intakeBall = xboxControllerOne.b;
 		intakeBall.whileHeld(new IntakeBall());
 		elevateLift = xboxControllerOne.y;

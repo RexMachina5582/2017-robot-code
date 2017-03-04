@@ -10,7 +10,7 @@ public class AutoLeftGearPeg extends CommandGroup {
     	addSequential(new AutoTurnRobotLeft(15, .5));
     	
     	// Leave these next 3 off for testing on Frank
-    	addSequential(new AutoTargetRotate());
+    	addSequential(new AutoTargetRotate(500));
     	addSequential(new AutoDriveToRange(100, 0.8));
     	addSequential(new AutoHangGearOnPeg());
     	

@@ -54,6 +54,17 @@ public class GearElevator extends Subsystem {
     	
     }
     
+    public boolean atTop() {
+    	int avgRaw;
+    	avgRaw = upperLimitSensor.getAverageValue();
+    	
+    	if (avgRaw > 300) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
     public void elevateGearLift() {
     	
     	int avgRaw;
@@ -70,7 +81,7 @@ public class GearElevator extends Subsystem {
     			"distance : " + String.valueOf(distance));
     	
     	// Have we triggered the limit sensor?
-    	if (avgRaw > 300) {
+    	if (atTop()) {
     		speed = 0;
     		elevatorEncoder.reset();
     	} else {

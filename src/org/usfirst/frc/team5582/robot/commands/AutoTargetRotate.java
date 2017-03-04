@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoTargetRotate extends CommandBase {
 	private double offset;
+	private static int searchCycles;
+	private static int maxSearchCycles;
 
 	//Major is the large rotation phase, and minor is the small
 	private double MAJOR_SPEED = .40;
@@ -24,9 +26,9 @@ public class AutoTargetRotate extends CommandBase {
 	FloatInput errorInput;
 	PIDOutput rotateOutput;
 	
-	public AutoTargetRotate() {
+	public AutoTargetRotate(int maxCycles) {
     	requires(driveTrain);
-    	
+    	maxSearchCycles = maxCycles;
     }
 	
     // Called just before this Command runs the first time
@@ -91,11 +93,14 @@ public class AutoTargetRotate extends CommandBase {
     		System.out.println(speed);
     	
     		driveTrain.arcadeDriveSkidTurn(0, -speed);
-    
+    		searchCycles++;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if (searchCycles > maxSearchCycles) {
+    		return true;
+    	}
     		System.out.println("TargetRotate offset:" + offset);
         return Math.abs(offset) < TOLERANCE;
     }
