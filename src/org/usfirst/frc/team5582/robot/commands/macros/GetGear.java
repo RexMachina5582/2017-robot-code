@@ -11,10 +11,10 @@ public class GetGear extends CommandGroup {
 
     public GetGear() {
         
-    	//addSequential(new LowerGearElevatorFully());
+    	addSequential(new LowerGearElevatorFully());
     	addSequential(new WaitForGear());
     	addSequential(new GripperDeploy());
-    	//addSequential(new ElevateGearFully());
+    	addSequential(new ElevateGearFully());
     	
     }
 }

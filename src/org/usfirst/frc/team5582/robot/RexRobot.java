@@ -66,6 +66,7 @@ public class RexRobot extends IterativeRobot {
 		autoChooser.addObject("Station 3: peg to left", new AutoLeftGearPeg());
 		autoChoices = new String[]{
 				"simple",
+				"station 1",
 				"station 3"
 		};
 		dash.putStringArray("Auto List", autoChoices);
@@ -88,12 +89,21 @@ public class RexRobot extends IterativeRobot {
     	
     	String autoSelection = new String(dash.getString("Auto Selector", "simple"));
     	SmartDashboard.putString("Autonomous mode", autoSelection);    	
-
-    	if (autoSelection.equals("station 3")) {
+    	
+    	if (autoSelection.equals("station 1")) {
+    		autonomousCommand = new AutoDriveDistance(200, 0.6);
+    	} else if (autoSelection.equals("station 3")) {
     		autonomousCommand = new AutoLeftGearPeg();
     	} else {
-    		autonomousCommand = new AutoDriveDistance(20, 0.6);
+    		autonomousCommand = new AutoDriveDistance(0, 0.6);
     	}
+    	
+    	
+//    	if (autoSelection.equals("station 3")) {
+//    		autonomousCommand = new AutoLeftGearPeg();
+//    	} else {
+//    		autonomousCommand = new AutoDriveDistance(20, 0.6);
+//    	}
 //    	autonomousCommand = (Command) autoChooser.getSelected();
     	autonomousCommand.start();
 

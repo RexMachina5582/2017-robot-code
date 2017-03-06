@@ -2,12 +2,14 @@ package org.usfirst.frc.team5582.robot.commands;
 
 import org.usfirst.frc.team5582.robot.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  */
 public class AutoHangGearOnPeg extends CommandBase {
 	
-	private int elevatorDropPoint = 250;
+	private int elevatorDropPoint = 150;
 
     public AutoHangGearOnPeg() {
     	requires(gearElevator);
@@ -19,11 +21,13 @@ public class AutoHangGearOnPeg extends CommandBase {
     protected void initialize() {
     	driveTrain.stopDrive();
     	gearGripper.releaseGear();
+    	SmartDashboard.putString("Called:", "AutoHangGearOnPeg");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	gearElevator.dropGearLift();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

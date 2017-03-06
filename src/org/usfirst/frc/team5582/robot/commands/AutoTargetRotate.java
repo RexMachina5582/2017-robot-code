@@ -3,17 +3,19 @@ package org.usfirst.frc.team5582.robot.commands;
 import org.json.simple.JSONObject;
 import org.usfirst.frc.team5582.robot.RexRobot;
 import org.usfirst.frc.team5582.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class AutoTargetRotate extends CommandBase {
 	private double offset;
-	private static int searchCycles;
+	private static int searchCycles = 0;
 	private static int maxSearchCycles;
 
 	//Major is the large rotation phase, and minor is the small
@@ -21,6 +23,7 @@ public class AutoTargetRotate extends CommandBase {
 	private double MINOR_SPEED = .20;
 	private double TRANSITION_ERROR = 100;
 	private double TOLERANCE = 3;
+	private boolean hasTarget;
 	
 	PIDController rotationPID;
 	FloatInput errorInput;
@@ -34,11 +37,13 @@ public class AutoTargetRotate extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
     	driveTrain.lightOn();
+    	SmartDashboard.putString("Called:", "AutoTargetRotate");
+    	searchCycles = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		boolean hasTarget;
+    	searchCycles++;
     		JSONObject obj = null;
 	    	try {
 	    		obj = RexRobot.messageClient.getJsonObject("rex/vision/telemetry");
@@ -93,7 +98,6 @@ public class AutoTargetRotate extends CommandBase {
     		System.out.println(speed);
     	
     		driveTrain.arcadeDriveSkidTurn(0, -speed);
-    		searchCycles++;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -102,6 +106,9 @@ public class AutoTargetRotate extends CommandBase {
     		return true;
     	}
     		System.out.println("TargetRotate offset:" + offset);
+    	if (!hasTarget) {
+    		return false;
+    	}
         return Math.abs(offset) < TOLERANCE;
     }
 

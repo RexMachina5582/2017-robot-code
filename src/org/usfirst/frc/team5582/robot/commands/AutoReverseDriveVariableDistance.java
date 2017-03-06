@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5582.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 
 /**
@@ -11,6 +13,7 @@ public class AutoReverseDriveVariableDistance extends CommandBase {
 	private static double fastDist;
 	private static double sSpeed;
 	private static double fSpeed;
+//	private static int fail
 
     public AutoReverseDriveVariableDistance(double slowDistance, double fastDistance, double slowSpeed, double fastSpeed) {
         // Use requires() here to declare subsystem dependencies
@@ -25,23 +28,14 @@ public class AutoReverseDriveVariableDistance extends CommandBase {
     protected void initialize() {
     	driveTrain.resetDistance();
     	driveTrain.resetRamp();
+    	SmartDashboard.putString("Called:", "AutoReverseDriveVariableDistance");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if (driveTrain.getLeftDistance() < slowDist && 
-    			driveTrain.getRightDistance() < slowDist) {
-    		driveTrain.goDrive(sSpeed);
-    	}
-    	if (driveTrain.getLeftDistance() > slowDist && 
-    			driveTrain.getRightDistance() > slowDist) {
-    		driveTrain.goDrive(fSpeed);
-    	}
-    	if (driveTrain.getLeftDistance() > fastDist && 
-    			driveTrain.getRightDistance() > fastDist) {
-    		driveTrain.stopDrive();
-    	}
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

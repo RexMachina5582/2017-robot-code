@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoDriveDistance extends CommandBase {
 
+	private static int failSafeCycleCount;
+	private static double calcTime;
 	private static double targetDistance;
 	private static double targetSpeed;
 	
@@ -15,16 +17,20 @@ public class AutoDriveDistance extends CommandBase {
         requires(driveTrain);
         targetDistance = distance;
         targetSpeed = speed;
+        calcTime = ((distance / 20) * 50) + 50;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	driveTrain.resetDistance();
     	driveTrain.resetRamp();
+    	SmartDashboard.putString("Called:", "AutoDriveDistance");
+    	failSafeCycleCount = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	failSafeCycleCount++;
     	double traveledDistance = driveTrain.getLeftDistance();
     	double adjustedSpeed = targetSpeed;
     	if (traveledDistance < targetDistance) {   
@@ -44,6 +50,8 @@ public class AutoDriveDistance extends CommandBase {
     	SmartDashboard.putNumber("AutoDrive actual distance", actualDistance);
 
     	if (actualDistance >= targetDistance) {
+    		return true;
+    	} else if (failSafeCycleCount > calcTime) {
     		return true;
     	} else {
     		return false;	
