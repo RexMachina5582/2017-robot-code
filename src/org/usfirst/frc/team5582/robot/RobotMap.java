@@ -42,6 +42,7 @@ public class RobotMap {
     public static int gearElevatorUpperLimitSensor = 2;
 
     // RELAY
+    public static int gearLights = 0;
     public static int lightRelay = 1;
 	
 }

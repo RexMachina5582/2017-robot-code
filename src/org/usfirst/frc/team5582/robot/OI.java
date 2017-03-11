@@ -1,9 +1,11 @@
 package org.usfirst.frc.team5582.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+
 import org.usfirst.frc.team5582.robot.subsystems.*;
 import org.usfirst.frc.team5582.robot.commands.*;
 import org.usfirst.frc.team5582.robot.commands.macros.*;
+
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
@@ -46,6 +48,7 @@ public class OI {
 	public static Button stageBall;
 	public static Button climbRope;
 	public static Button releaseRope;
+	public static Button lightGearlights;
 	
 	public static Trigger deployGripper;
 	public static Trigger releaseGripper;
@@ -86,6 +89,9 @@ public class OI {
 		deployGripper.whenActive(new GripperDeploy());
 		releaseGripper = xboxControllerOne.rt;
 		releaseGripper.whenActive(new GripperRelease());
+		
+		lightGearlights = xboxControllerOne.dPad.down;
+		lightGearlights.whenPressed(new LightGearLights());
 		
 		/** PANEL **/
 		autoPegSwitch = true;

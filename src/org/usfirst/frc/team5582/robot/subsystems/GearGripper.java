@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5582.robot.RobotMap;
 import org.usfirst.frc.team5582.robot.commands.GripperDeploy;
 import org.usfirst.frc.team5582.robot.commands.GripperRelease;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Servo;
 
 /**
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.Servo;
  */
 public class GearGripper extends Subsystem {
 
+	Relay gearLightRelay = new Relay(RobotMap.gearLights);
 	Servo gearClamp;
 	
     // Put methods for controlling this subsystem
@@ -46,6 +48,14 @@ public class GearGripper extends Subsystem {
     
     public void releaseGear() {
     	gearClamp.setAngle(0);
+    }
+    
+    public void lightOn() {
+    	gearLightRelay.set(Relay.Value.kOn);
+    }
+    
+    public void lightOff() {
+    	gearLightRelay.set(Relay.Value.kOff);
     }
     
 }
