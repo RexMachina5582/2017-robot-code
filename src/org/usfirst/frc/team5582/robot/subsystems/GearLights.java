@@ -3,7 +3,7 @@ package org.usfirst.frc.team5582.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Relay;
-
+import org.usfirst.frc.team5582.robot.commands.ManageGearLights;
 import org.usfirst.frc.team5582.robot.RobotMap;
 
 /**
@@ -27,7 +27,7 @@ public class GearLights extends Subsystem {
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new ManageGearLights());
     }
     
     protected GearLights() {

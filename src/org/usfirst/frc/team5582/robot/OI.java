@@ -91,7 +91,7 @@ public class OI {
 		releaseGripper.whenActive(new GripperRelease());
 		
 		lightGearlights = xboxControllerOne.dPad.down;
-		lightGearlights.whenPressed(new LightGearLights());
+		lightGearlights.whenPressed(new ManageGearLights());
 		
 		/** PANEL **/
 		autoPegSwitch = true;

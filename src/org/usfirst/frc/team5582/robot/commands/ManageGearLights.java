@@ -4,11 +4,11 @@ package org.usfirst.frc.team5582.robot.commands;
 /**
  *
  */
-public class LightGearLights extends CommandBase {
+public class ManageGearLights extends CommandBase {
 
-    public LightGearLights() {
+    public ManageGearLights() {
         // Use requires() here to declare subsystem dependencies
-        // requires(chassis);
+        requires(gearLights);
     }
 
     // Called just before this Command runs the first time
