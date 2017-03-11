@@ -43,7 +43,7 @@ public class RobotMap {
     public static int infraredSensor = 3;
 
     // RELAY
-    public static int gearLights = 0;
+    public static int gearLights = 2;
     public static int lightRelay = 1;
 	
 }

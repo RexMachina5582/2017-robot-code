@@ -18,7 +18,14 @@ public class ManageGearLights extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	gearLights.setLumos();
+    	if(gearElevator.laserGearSensor.get())
+    	{
+    		gearLights.setLumos();
+    	}
+    	else
+    	{
+    		gearLights.setNox();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -28,7 +35,7 @@ public class ManageGearLights extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	gearLights.setNox();
+    	
     }
 
     // Called when another command which requires one or more of the same

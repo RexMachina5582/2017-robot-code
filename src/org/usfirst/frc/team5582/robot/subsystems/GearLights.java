@@ -11,7 +11,7 @@ import org.usfirst.frc.team5582.robot.RobotMap;
  */
 public class GearLights extends Subsystem {
 
-    Relay gearLights;
+    Relay gearLightsRelay;
 
  // First, some Singleton housekeeping. Make sure there is only one.	
  	public static GearLights instance;	
@@ -31,16 +31,16 @@ public class GearLights extends Subsystem {
     }
     
     protected GearLights() {
-    	gearLights = new Relay(RobotMap.gearLights);
-    	gearLights.setDirection(Relay.Direction.kBoth);
+    	gearLightsRelay = new Relay(RobotMap.gearLights);
+    	gearLightsRelay.setDirection(Relay.Direction.kBoth);
     	
     }
     
     public void setLumos() {
-    	gearLights.set(Relay.Value.kOn);
+    	gearLightsRelay.set(Relay.Value.kOn);
     }
     public void setNox() {
-    	gearLights.set(Relay.Value.kOff);
+    	gearLightsRelay.set(Relay.Value.kOff);
     }
     
 }
