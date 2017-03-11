@@ -24,6 +24,7 @@ public class ArcadeDrive extends CommandBase {
     protected void execute() {
     		driveTrain.arcadeDriveStickAxis(OI.xboxControllerOne.leftStick.getY(), 
     		OI.xboxControllerOne.leftStick.getX());
+    		driveTrain.getInfraredDistance();
 		
     }
 

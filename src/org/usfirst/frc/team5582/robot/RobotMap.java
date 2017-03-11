@@ -40,6 +40,7 @@ public class RobotMap {
     // Analog Inputs
     public static int frontUltrasonic = 0;
     public static int gearElevatorUpperLimitSensor = 2;
+    public static int infraredSensor = 3;
 
     // RELAY
     public static int lightRelay = 1;

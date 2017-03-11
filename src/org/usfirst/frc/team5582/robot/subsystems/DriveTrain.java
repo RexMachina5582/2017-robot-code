@@ -27,6 +27,7 @@ public class DriveTrain extends Subsystem {
 	CANTalon leftTalonA, leftTalonB, rightTalonA, rightTalonB;
 
     public AnalogInput ultrasonicSensor;
+    public AnalogInput infraredSensor;
     public static DigitalInput leftEncoder;
     public static Counter leftWheelCounter;
     public static DigitalInput rightEncoder;
@@ -75,6 +76,7 @@ public class DriveTrain extends Subsystem {
 		lightRelay.setDirection(Relay.Direction.kBoth);
 		
 		ultrasonicSensor = new AnalogInput(RobotMap.frontUltrasonic);
+		infraredSensor =  new AnalogInput(RobotMap.infraredSensor);
     }
 
     public void lightOn() {
@@ -97,6 +99,7 @@ public class DriveTrain extends Subsystem {
     		// We get distance just so it shows on dashboard
     		double distance = getLeftDistance();
     		distance = getRightDistance();
+    		double infraredDistance = getInfraredDistance();
     		
     		rexDrive.arcadeDrive(leftY, leftX);
     		// Distance avg value is around 100 at min range (13 in) and about 200 at 4 feet
@@ -196,6 +199,19 @@ public class DriveTrain extends Subsystem {
     	double distance = rightWheelCounter.getDistance();
     	SmartDashboard.putNumber("Drivetrain right distance", distance);    	
     	return distance;
+    }
+    
+    public double getInfraredDistance()
+    {
+    	double voltage = infraredSensor.getAverageVoltage();
+    	
+    	//this is the scaling from voltage to distance with the SHARP IR sensor (10cm - 80cm)
+    	double distance = -(voltage)*(26.92)+90.768;
+    	
+    	SmartDashboard.putNumber("Infrared Distance", distance );
+    	
+    	return distance;
+    	
     }
     
 }
