@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoHangGearOnPeg extends CommandBase {
 	
-	private int elevatorDropPoint = 150;
+	private int elevatorDropPoint = 100;
 
     public AutoHangGearOnPeg() {
     	requires(gearElevator);

@@ -97,7 +97,7 @@ public class AutoTargetRotate extends CommandBase {
     	
     		System.out.println(speed);
     	
-    		driveTrain.arcadeDriveSkidTurn(0, -speed);
+    		driveTrain.arcadeDriveSkidTurn(0, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

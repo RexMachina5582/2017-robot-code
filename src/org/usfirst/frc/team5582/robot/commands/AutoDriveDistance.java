@@ -16,7 +16,7 @@ public class AutoDriveDistance extends CommandBase {
         // Use requires() here to declare subsystem dependencies
         requires(driveTrain);
         targetDistance = distance;
-        targetSpeed = speed;
+        targetSpeed = (-1)*speed;
         calcTime = ((distance / 20) * 50) + 50;
     }
 

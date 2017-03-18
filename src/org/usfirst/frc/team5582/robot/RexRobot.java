@@ -91,7 +91,7 @@ public class RexRobot extends IterativeRobot {
     	SmartDashboard.putString("Autonomous mode", autoSelection);    	
     	
     	if (autoSelection.equals("station 1")) {
-    		autonomousCommand = new AutoDriveDistance(200, 0.6);
+    		autonomousCommand = new AutoDriveDistance(200, -0.6);
     	} else if (autoSelection.equals("station 3")) {
     		autonomousCommand = new AutoLeftGearPeg();
     	} else {
