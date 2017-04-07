@@ -48,6 +48,7 @@ public class RexRobot extends IterativeRobot {
     Command autonomousBallArms;
     Command autoLeftGearPeg;
     Command autoRightGearPeg;
+    Command autoCloseServo;
     public static MessageClient messageClient;
     SmartDashboard dash;
 
@@ -67,7 +68,9 @@ public class RexRobot extends IterativeRobot {
 		autoChoices = new String[]{
 				"simple",
 				"station 1",
+				"station 2",
 				"station 3"
+				
 		};
 		dash.putStringArray("Auto List", autoChoices);
    }
@@ -88,13 +91,20 @@ public class RexRobot extends IterativeRobot {
     public void autonomousInit() {
     	
     	String autoSelection = new String(dash.getString("Auto Selector", "simple"));
-    	SmartDashboard.putString("Autonomous mode", autoSelection);    	
+    	SmartDashboard.putString("Autonomous mode", autoSelection);
+    	
+    	autoCloseServo = new GripperDeploy();
     	
     	if (autoSelection.equals("station 1")) {
-    		autonomousCommand = new AutoDriveDistance(200, -0.6);
+    		autonomousCommand = new AutoDriveDistance(230, 0.6);
     	} else if (autoSelection.equals("station 3")) {
     		autonomousCommand = new AutoLeftGearPeg();
-    	} else {
+    	} 
+    	else if (autoSelection.equals("station 2"))
+    	{
+    		autonomousCommand = new AutoMiddleGear();
+    	}
+    	else {
     		autonomousCommand = new AutoDriveDistance(0, 0.6);
     	}
     	
@@ -105,6 +115,7 @@ public class RexRobot extends IterativeRobot {
 //    		autonomousCommand = new AutoDriveDistance(20, 0.6);
 //    	}
 //    	autonomousCommand = (Command) autoChooser.getSelected();
+    	autoCloseServo.start();
     	autonomousCommand.start();
 
 //    	if (OI.autoPegSwitch) {

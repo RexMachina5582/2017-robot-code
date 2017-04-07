@@ -39,7 +39,7 @@ public class AutoDriveDistance extends CommandBase {
     			// Start slowing down
     			adjustedSpeed = targetSpeed * (1.0 - 1.0/distanceDiff);
     		}
-    		driveTrain.goStraightRamp(adjustedSpeed);
+    		driveTrain.goDrive(adjustedSpeed);
     	}
     }
 
@@ -53,7 +53,12 @@ public class AutoDriveDistance extends CommandBase {
     		return true;
     	} else if (failSafeCycleCount > calcTime) {
     		return true;
-    	} else {
+    	}
+    	else if(failSafeCycleCount > 320)
+    	{
+    		return true;
+    	}
+    	else {
     		return false;	
     	}
     }

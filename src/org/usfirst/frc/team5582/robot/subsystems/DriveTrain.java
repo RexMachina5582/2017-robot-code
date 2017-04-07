@@ -165,11 +165,11 @@ public class DriveTrain extends Subsystem {
     
     public void turn (boolean rightTurn, double speed) {
     	// Ramps up to target speed
-		calcRamp(speed);		
+		//calcRamp(speed);		
 		if (rightTurn) {
-			rexDrive.setLeftRightMotorOutputs(rampedSpeed, -rampedSpeed);
+			rexDrive.setLeftRightMotorOutputs(speed, -speed);
 		} else {
-			rexDrive.setLeftRightMotorOutputs(-rampedSpeed, rampedSpeed);
+			rexDrive.setLeftRightMotorOutputs(-speed, speed);
 		}
 	}
     

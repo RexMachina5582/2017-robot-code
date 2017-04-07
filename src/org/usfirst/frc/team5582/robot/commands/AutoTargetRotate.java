@@ -21,8 +21,8 @@ public class AutoTargetRotate extends CommandBase {
 	//Major is the large rotation phase, and minor is the small
 	private double MAJOR_SPEED = .40;
 	private double MINOR_SPEED = .20;
-	private double TRANSITION_ERROR = 100;
-	private double TOLERANCE = 3;
+	private double TRANSITION_ERROR = 50;
+	private double TOLERANCE = .5;
 	private boolean hasTarget;
 	
 	PIDController rotationPID;
@@ -97,7 +97,7 @@ public class AutoTargetRotate extends CommandBase {
     	
     		System.out.println(speed);
     	
-    		driveTrain.arcadeDriveSkidTurn(0, speed);
+    		driveTrain.turn(false, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
